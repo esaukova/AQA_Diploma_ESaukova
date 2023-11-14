@@ -28,7 +28,7 @@ git clone https://github.com/esaukova/AQA_Diploma_ESaukova
 1. Открыть терминал и запустить контейнеры: docker-compose up 
 2. Открыть новую вкладку терминала и запустить приложение: java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar
 3. Проверить, что приложение успешно запустилось (ввести URL в браузере Сhrome: http://localhost/8080)
-4. Открыть новую вкладку терминала и запустить тесты: .\gradlew clean test 
+4. Открыть новую вкладку терминала и запустить тесты: .\gradlew clean test -DdbUrl=jdbc:mysql://localhost:3306/app
 5. Создать отчёт Allure: .\gradlew allureServe
 6. Остановить приложение: CTRL + C
 7. Остановить контейнеры: docker-compose down
@@ -39,7 +39,7 @@ git clone https://github.com/esaukova/AQA_Diploma_ESaukova
 2. Открыть терминал и запустить контейнеры: docker-compose up 
 3. Открыть новую вкладку терминала и запустить приложение: java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
 4. Проверить, что приложение успешно запустилось (ввести URL в браузере Сhrome: http://localhost/8080)
-5. Открыть новую вкладку терминала и запустить тесты: .\gradlew clean test
+5. Открыть новую вкладку терминала и запустить тесты: .\gradlew clean test -DdbUrl=jdbc:postgresql://localhost:5432/app
 6. Создать отчёт Allure: .\gradlew allureServe
 7. Остановить приложение: CTRL + C
 8. Остановить контейнеры: docker-compose down
