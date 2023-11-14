@@ -35,7 +35,7 @@ public class APIHelper {
                 .spec(requestSpec)
                 .body(body)
                 .when()
-                .post("/api/v1/credit")
+                .post("/credit")
                 .then()
                 .statusCode(statusCode);
     }

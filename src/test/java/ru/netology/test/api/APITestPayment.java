@@ -77,7 +77,7 @@ public class APITestPayment {
     }
 
     @Test
-    void shouldRespondWithStatus400IfAllFieldIsEmpty() { //поменять в плане ТС10 на проверку всех пустых полей
+    void shouldRespondWithStatus400IfAllFieldIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyFields();
         var body = gson.toJson(cardInfo);
         APIHelper.createPayment(body, 400);

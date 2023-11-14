@@ -77,7 +77,7 @@ public class APITestCredit {
     }
 
     @Test
-    void shouldRespondWithStatus400IfAllFieldIsEmpty() { //поменять в плане ТС16 на проверку всех пустых полей
+    void shouldRespondWithStatus400IfAllFieldIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyFields();
         var body = gson.toJson(cardInfo);
         APIHelper.createCreditRequest(body, 400);

@@ -16,7 +16,7 @@ public class CreditRequestPage {
     private SelenideElement cardNumberField = $("[placeholder='0000 0000 0000 0000']");
     private SelenideElement monthField = $("[placeholder='08']");
     private SelenideElement yearField = $("[placeholder='22']");
-    private SelenideElement cardHolderField = $("input:not([placeholder])");
+    private SelenideElement cardHolderField = $x("//fieldset/div[3]/span/span[1]/span/span/span[2]/input");
     private SelenideElement cvcField = $("[placeholder='999']");
     private SelenideElement operationApproved = $(".notification_status_ok");
     private SelenideElement operationDeclined = $(".notification_status_error");
@@ -30,9 +30,6 @@ public class CreditRequestPage {
         creditRequestHeading.shouldBe(visible);
     }
 
-    public SelenideElement getCardHolderField() {
-        return cardHolderField;
-    }
 
     public void inputData(DataHelper.CardInfo card) {
         cardNumberField.setValue(card.getNumber());

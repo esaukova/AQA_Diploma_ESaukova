@@ -100,7 +100,7 @@ public class UICreditTest {
         var creditPage = page.clickButtonCredit();
         var cardInfo = DataHelper.getCardInfoWithMonthMoreThan12();
         creditPage.inputData(cardInfo);
-        creditPage.checkWrongFormat();
+        creditPage.checkInvalidCardExpirationDate();
 
     }
 
@@ -110,7 +110,7 @@ public class UICreditTest {
         var creditPage = page.clickButtonCredit();
         var cardInfo = DataHelper.getCardInfoWithMonthWithZero();
         creditPage.inputData(cardInfo);
-        creditPage.checkWrongFormat();
+        creditPage.checkInvalidCardExpirationDate();
 
     }
 
@@ -175,12 +175,6 @@ public class UICreditTest {
         var cardInfo = DataHelper.getCardInfoWithHolderWithSpecialCharacters();
         creditPage.inputData(cardInfo);
         creditPage.checkWrongFormat();
-
-    }
-
-    @Test
-    @DisplayName("The credit card with lower case in holder")
-    void shouldReplaceLowerCaseToUpperCaseInHolder() {
 
     }
 

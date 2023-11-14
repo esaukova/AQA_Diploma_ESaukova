@@ -83,7 +83,7 @@ public class DataHelper {
 
     public static CardInfo getCardInfoWithMonthWith1Digit() {
         return new CardInfo(getApprovedCardNumber(),
-                LocalDate.now().format(DateTimeFormatter.ofPattern("M")), // месяц с одной цифрой
+                faker.numerify("#"), // месяц с одной цифрой
                 LocalDate.now().format(DateTimeFormatter.ofPattern("yy")), // год
                 faker.name().firstName().toUpperCase() + " " + faker.name().lastName().toUpperCase(), // владелец
                 faker.numerify("###")); // cvc

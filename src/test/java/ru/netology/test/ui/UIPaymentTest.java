@@ -98,7 +98,7 @@ public class UIPaymentTest {
         var paymentPage = page.clickButtonPayment();
         var cardInfo = DataHelper.getCardInfoWithMonthMoreThan12();
         paymentPage.inputData(cardInfo);
-        paymentPage.checkWrongFormat();
+        paymentPage.checkInvalidCardExpirationDate();
 
     }
 
@@ -108,7 +108,7 @@ public class UIPaymentTest {
         var paymentPage = page.clickButtonPayment();
         var cardInfo = DataHelper.getCardInfoWithMonthWithZero();
         paymentPage.inputData(cardInfo);
-        paymentPage.checkWrongFormat();
+        paymentPage.checkInvalidCardExpirationDate();
 
     }
 
