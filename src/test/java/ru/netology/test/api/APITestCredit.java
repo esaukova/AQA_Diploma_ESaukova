@@ -29,7 +29,7 @@ public class APITestCredit {
     void shouldRespondWithStatus200IfApprovedCard() {
         cardInfo = DataHelper.getValidDataForApprovedCard();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 200)
+        APIHelper.createRequest(body, 200, "/api/v1/credit")
                 .body("status", equalTo("APPROVED"));
     }
 
@@ -37,7 +37,7 @@ public class APITestCredit {
     void shouldRespondWithStatus400IfDeclinedCard() {
         cardInfo = DataHelper.getValidDataForDeclinedCard();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400)
+        APIHelper.createRequest(body, 400, "/api/v1/credit")
                 .body("status", equalTo("DECLINED"));
     }
 
@@ -45,42 +45,42 @@ public class APITestCredit {
     void shouldRespondWithStatus400IfFieldNumberIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyNumber();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit");
     }
 
     @Test
     void shouldRespondWithStatus400IfFieldMonthIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyMonth();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit");
     }
 
     @Test
     void shouldRespondWithStatus400IfFieldYearIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyYear();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit");
     }
 
     @Test
     void shouldRespondWithStatus400IfFieldHolderIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyHolder();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit");
     }
 
     @Test
     void shouldRespondWithStatus400IfFieldCVCIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyCVC();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit");
     }
 
     @Test
     void shouldRespondWithStatus400IfAllFieldIsEmpty() {
         cardInfo = DataHelper.getCardInfoWithEmptyFields();
         var body = gson.toJson(cardInfo);
-        APIHelper.createCreditRequest(body, 400);
+        APIHelper.createRequest(body, 400, "/api/v1/credit ");
     }
 
 }

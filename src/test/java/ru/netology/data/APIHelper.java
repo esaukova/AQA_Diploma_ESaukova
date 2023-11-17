@@ -5,37 +5,25 @@ import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import com.google.gson.Gson;
 
 import static io.restassured.RestAssured.given;
 
 public class APIHelper {
-    private static final Gson gson = new Gson();
 
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
-            .setPort(9999)
+            .setPort(8080)
             .setAccept(ContentType.JSON)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
 
-    public static ValidatableResponse createPayment(String body, int statusCode) {
+    public static ValidatableResponse createRequest(String body, int statusCode, String endpoint) {
         return given()
                 .spec(requestSpec)
                 .body(body)
                 .when()
-                .post("/payment")
-                .then()
-                .statusCode(statusCode);
-    }
-
-    public static ValidatableResponse createCreditRequest(String body, int statusCode) {
-        return given()
-                .spec(requestSpec)
-                .body(body)
-                .when()
-                .post("/credit")
+                .post(endpoint)
                 .then()
                 .statusCode(statusCode);
     }

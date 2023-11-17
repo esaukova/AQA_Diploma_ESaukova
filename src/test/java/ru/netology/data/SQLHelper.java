@@ -2,7 +2,6 @@ package ru.netology.data;
 
 import lombok.*;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,31 +14,29 @@ public class SQLHelper {
 
     @SneakyThrows
     public static Connection getConnection() {
-        return DriverManager.getConnection(System.getProperty("db.url"), "app", "pass");
+        return DriverManager.getConnection(System.getProperty("dbUrl"), "app", "pass");
     }
 
     @SneakyThrows
     public static String getStatusCreditRequestEntity() {
-        try (val conn = getConnection();
-             val countStmt = conn.createStatement()) {
-            val sql = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
-            val resultSet = countStmt.executeQuery(sql);
-            if (resultSet.next()) {
-                return resultSet.getString("status");
-            }
+        val conn = getConnection();
+        val countStmt = conn.createStatement();
+        val sql = "SELECT status FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
+        val resultSet = countStmt.executeQuery(sql);
+        if (resultSet.next()) {
+            return resultSet.getString("status");
         }
         return null;
     }
 
     @SneakyThrows
     public static String getStatusPaymentEntity() {
-        try (val conn = getConnection();
-             val countStmt = conn.createStatement()) {
-            val sql = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;";
-            val resultSet = countStmt.executeQuery(sql);
-            if (resultSet.next()) {
-                return resultSet.getString("status");
-            }
+        val conn = getConnection();
+        val countStmt = conn.createStatement();
+        val sql = "SELECT status FROM payment_entity ORDER BY created DESC LIMIT 1;";
+        val resultSet = countStmt.executeQuery(sql);
+        if (resultSet.next()) {
+            return resultSet.getString("status");
         }
         return null;
     }
