@@ -42,6 +42,19 @@ public class SQLHelper {
     }
 
     @SneakyThrows
+    public static int getCountOrderEntity() {
+        val conn = getConnection();
+        val countStmt = conn.createStatement();
+        val sql = "SELECT COUNT(*) AS total FROM order_entity;";
+        val resultSet = countStmt.executeQuery(sql);
+        if (resultSet.next()) {
+            return resultSet.getInt("total");
+        }
+        return 0;
+
+    }
+
+    @SneakyThrows
     public static void cleanDB() {
         var connection = getConnection();
         runner.update(connection, "DELETE FROM credit_request_entity");

@@ -2,14 +2,19 @@ package ru.netology.test.api;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.val;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import com.google.gson.Gson;
 import ru.netology.data.DataHelper;
 import ru.netology.data.APIHelper;
+import ru.netology.data.SQLHelper;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static ru.netology.data.SQLHelper.cleanDB;
 
 public class APITestPayment {
     private static DataHelper.CardInfo cardInfo;
@@ -25,20 +30,31 @@ public class APITestPayment {
         SelenideLogger.removeListener("allure");
     }
 
+    @AfterEach
+    public void teardrop() {
+        cleanDB();
+    }
+
     @Test
     void shouldRespondWithStatus200IfApprovedCard() {
         cardInfo = DataHelper.getValidDataForApprovedCard();
         var body = gson.toJson(cardInfo);
-        APIHelper.createRequest(body, 200, "/api/v1/pay")
-                .body("status", equalTo("APPROVED"));
+        APIHelper.createRequest(body, 200, "/api/v1/pay");
+        val actual = SQLHelper.getStatusPaymentEntity();
+        assertEquals("APPROVED", actual);
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(1, orderCount);
     }
 
     @Test
     void shouldRespondWithStatus400IfDeclinedCard() {
         cardInfo = DataHelper.getValidDataForDeclinedCard();
         var body = gson.toJson(cardInfo);
-        APIHelper.createRequest(body, 400, "/api/v1/pay")
-                .body("status", equalTo("DECLINED"));
+        APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val actual = SQLHelper.getStatusPaymentEntity();
+        assertEquals("DECLINED", actual);
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -46,6 +62,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyNumber();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -53,6 +71,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyMonth();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -60,6 +80,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyYear();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -67,6 +89,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyHolder();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -74,6 +98,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyCVC();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
     @Test
@@ -81,6 +107,8 @@ public class APITestPayment {
         cardInfo = DataHelper.getCardInfoWithEmptyFields();
         var body = gson.toJson(cardInfo);
         APIHelper.createRequest(body, 400, "/api/v1/pay");
+        val orderCount = SQLHelper.getCountOrderEntity();
+        assertEquals(0, orderCount);
     }
 
 }
