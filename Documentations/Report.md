@@ -7,9 +7,13 @@
 ## Тестовое окружение:
 
 Операционная система: Windows 10 Home Single Language version 22H2
+
 IDE: IntelliJ IDEA 2023.1.5 (Community Edition)
+
 Java: OpenJDK 11 Corretto version 11.0.19
+
 Docker Desktop: version 4.25.1
+
 Google Chrome: version 119.0.6045.160 (Official Build) (64-bit)
 
 ## Результаты тестирования:
